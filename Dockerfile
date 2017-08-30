@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM centos
-RUN yum -y install /usr/bin/ps nfs-utils && yum clean all
+FROM ubuntu:xenial
+RUN apt-get update && apt-get install -y --no-install-recommends netbase nfs-kernel-server && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /exports
 ADD run_nfs.sh /usr/local/bin/
 ADD index.html /tmp/index.html
