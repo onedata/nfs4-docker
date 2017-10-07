@@ -15,6 +15,7 @@ function start()
         # move index.html to here
         /bin/cp /tmp/index.html $i/
         chmod 644 $i/index.html
+        echo "${1#/}" > $i/"test_file_for_share_${1#/}.txt"
         echo "Serving $i"
     done
 
