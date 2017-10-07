@@ -12,9 +12,14 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-FROM ubuntu:xenial
+FROM debian:buster
 RUN apt-get update && apt-get install -y --no-install-recommends netbase nfs-kernel-server && rm -rf /var/lib/apt/lists/*
 RUN mkdir -p /exports
+RUN mkdir -p /e1
+RUN mkdir -p /e2
+RUN mkdir -p /e3
+RUN mkdir -p /e4
+RUN mkdir -p /e5
 ADD run_nfs.sh /usr/local/bin/
 ADD index.html /tmp/index.html
 RUN chmod 644 /tmp/index.html
@@ -23,3 +28,5 @@ RUN chmod 644 /tmp/index.html
 EXPOSE 2049/tcp 20048/tcp 111/tcp 111/udp
 
 ENTRYPOINT ["/usr/local/bin/run_nfs.sh", "/exports"]
+
+/usr/local/bin/run_nfs.sh /exports /e1 /e2 /e3 /e4 /e5
