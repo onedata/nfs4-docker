@@ -11,7 +11,7 @@ image:
 	docker tag $(PREFIX)/$(REPO_NAME) $(PREFIX)/$(REPO_NAME):$(TAG)  # Add the version tag to the latest image
 
 push: image
-	docker push $(PREFIX)/$(REPO_NAME) # Push image tagged as latest to repository
+	docker push $(PREFIX)/$(REPO_NAME):latest # Push image tagged as latest to repository
 	docker push $(PREFIX)/$(REPO_NAME):$(TAG) # Push version tagged image to repository (since this image is already pushed it will simply create or update version tag)
 
 clean:
