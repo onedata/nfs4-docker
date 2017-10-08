@@ -9,11 +9,12 @@ function start()
 {
 
     # prepare /etc/exports
+    echo "/ *(ro,fsid=0,async,insecure,no_root_squash,no_subtree_check)" >> /etc/exports
     for i in "$@"; do
         # fsid=0: needed for NFSv4
-        echo "$i *(rw,fsid=0,async,insecure,no_root_squash,no_subtree_check,anonuid=1000,anongid=1000)" >> /etc/exports
+        echo "$i *(rw,async,insecure,no_root_squash,no_subtree_check)" >> /etc/exports
         # move index.html to here
-        /bin/cp /tmp/index.html $i/
+        /bin/cp /tmp/index.html $i/ 
         chmod 644 $i/index.html
         echo "${1#/}" > $i/"test_file_for_share_${1#/}.txt"
         echo "Serving $i"
